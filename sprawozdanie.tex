@@ -1,0 +1,76 @@
+%Sprawozdanie - Sprawdzian PWI
+
+\documentclass[a4paper, 11pt]{article}
+\usepackage[OT4]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{amsmath, amsfonts}
+
+\begin{document}
+
+\title{Sprawozdanie}
+\author{Maksymilian Komarnicki}
+\date{\today}
+\maketitle
+
+\section{Zadanie 1}
+
+Generuje klucze poleceniem:\\
+ssh-keygen -t ed25519 -C [adres emai]\\
+\\
+Dodaje utworzony klucz prywatny do agent-SSH poleceniem:\\
+ssh-add $\tilde{\ }/.ssh/id_ed25519$\\
+\\
+Dodawanie klucza na serwer:\\
+ssh-copy-id -i $\tilde{\ }/.ssh/id_ed25519.pub mpyzik@pwi.ii.uni.wroc.pl$\\
+\\
+Testuje połączenie poleceniem:\\
+ssh -T mpyzik@pwi.ii.uni.wroc.pl\\
+\\
+Łączę się z serwerem poleceniem:\\
+ssh mpyzik@pwi.ii.uni.wroc.pl\\
+\\
+Rozłączam się z serwerem poleceniem:\\
+exit\\
+
+\section{Zadanie 2}
+
+Do utworzonego pliku dodaje informacje przy pomocy polecenia:\\
+nano maksymilian\_komarnicki\\
+\\
+Doklejenie do pliku sekwencji liczb podzielnych przez 7 od 0 do 100 wykonałem za pomocą polecenia:\\
+seq 0 7 100 >> maksymilian\_komarnicki.txt\\
+To polecenie pozwoliło przekierowanie strumienia wyjscia pierwszej czesci polecenia do pliku
+tekstowego 'maksymilian\_komarnicki.txt'. Znaki '>>' oznaczają aktualizacje pliku to znaczy sekwencja
+została dopisana do końca pliku\\
+\\
+Plik przenoszę do katalogu testy za pomocą polecenia:\\
+mv maksymilian\_komarnicki testy/\\
+\\
+Plik z servera na komputer lokalny przeniosłem za pomocą polecenia:\\
+scp mpyzik@pwi.ii.uni.wroc.pl:/home/mpyzik/maksymilian\_komarnicki/testy/maksymilian\_komarnicki$\tilde{\ }$/sprawdzian/\\
+
+\section{Zadanie 3}
+
+Utworzyłem pięć plików używając polecenia:\\
+hexdump /dev/urandom | head > file\\
+Polecenie powtórzyłem pięciokrotnie dla plikow file1, file2, file3, file4, file5\\
+\\
+Wszystkie utworzone pliki skleiłem używając polecenia:\\
+cat file* > concat\\
+Spowodowało to przekazanie strumienia wyjściowego(zawartosci wszystkich utworzonych plikow)
+do pliku concat.\\
+\\
+Następne zadanie zrealizowałem za pomocą polecenia:\\
+grep -E '\^0.*([a-fA-F0-9][a-fA-F0-9])\\1\$' concat > output\\
+Polecenie to znajduje w pliku concat odpowiednią frazę. Polecenie używa opcji -E (oznaczającą
+rozszerzone wyrażenia regularne). Znajduje takie linie, które zaczynają się od znaku '0',
+a kończą się powtórzoną liczbą szesnastkową, a następnie przekierowuje wyjście tego polecenia
+do pliku output.\\
+\\
+Policzenie lini w plikach:\\
+wc -l output\\
+wc -l concat\\
+Używając opcji -l polecenie zlicza ilość wierszy w pliku i wypisuje na wyjściu
+
+\end{document}
